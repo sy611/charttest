@@ -1,8 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable semi */
 $(function () {
-  console.log('hello!!')
-
   const ctx = $('#myChart')
   var myChart = new Chart(ctx, {
     type: 'bar',
@@ -39,9 +37,21 @@ $(function () {
         }]
       }
     }
-  });
+  })
 
-  addData(myChart, '金', 22)
+  $('#add').on('click', function () {
+    console.log('add clicked')
+    addData(myChart, '金', 22)
+  })
+
+  const objPattern = {
+    pattern1: [1, 2, 3, 4, 5, 6],
+    pattern2: [6, 5, 4, 3, 2, 1]
+  }
+  $('#contentSelect').on('change', function () {
+    const val = $(this).val()
+    console.log(objPattern[val])
+  })
 })
 
 function addData (chart, label, data) {
