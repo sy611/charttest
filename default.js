@@ -45,12 +45,20 @@ $(function () {
   })
 
   const objPattern = {
-    pattern1: [1, 2, 3, 4, 5, 6],
-    pattern2: [6, 5, 4, 3, 2, 1]
+    pattern1: {
+      labels: ['p1_1', 'p1_2', 'p1_3', 'p1_4', 'p1_5', 'p1_6'],
+      datasets: [1, 2, 3, 4, 5, 6]
+    },
+    pattern2: {
+      labels: ['p2_1', 'p2_2', 'p2_3', 'p2_4', 'p2_5', 'p2_6'],
+      datasets: [6, 5, 4, 3, 2, 1]
+    }
   }
   $('#contentSelect').on('change', function () {
     const val = $(this).val()
-    console.log(objPattern[val])
+    // console.log(objPattern[val])
+    console.log(objPattern[val]['labels'])
+    overwriteData(myChart, objPattern[val]['labels'], objPattern[val]['datasets'])
   })
 })
 
@@ -67,3 +75,12 @@ function addData (chart, label, data) {
 //   chart.data.labels = labels
 //   chart.data.datasets.
 // }
+
+function overwriteData (chart, labels, datasets) {
+  chart.data.labels = labels
+  // chart.data.datasets.data = datasets
+  chart.data.datasets.forEach((dataset) => {
+    dataset.data = datasets
+  })
+  chart.update()
+}
